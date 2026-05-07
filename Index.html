@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Glossar – DE / EN / 繁中</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f14;
+    --surface: #131820;
+    --border: #1e2a36;
+    --accent: #00d4aa;
+    --accent2: #ff6b35;
+    --accent3: #7c5cfc;
+    --text: #e0e8f0;
+    --muted: #5a7080;
+    --tag-de: rgba(124,92,252,0.18);
+    --tag-en: rgba(255,107,53,0.18);
+    --tag-zh: rgba(0,212,170,0.18);
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘JetBrains Mono’, monospace;
+min-height: 100vh;
+padding: 0 0 60px;
+}
+
+/* HEADER */
+header {
+background: linear-gradient(135deg, #0b0f14 0%, #111827 60%, #0d1a24 100%);
+border-bottom: 1px solid var(–border);
+padding: 36px 24px 28px;
+position: sticky;
+top: 0;
+z-index: 100;
+backdrop-filter: blur(12px);
+}
+
+.header-inner {
+max-width: 960px;
+margin: 0 auto;
+}
+
+h1 {
+font-family: ‘Syne’, sans-serif;
+font-size: clamp(1.4rem, 4vw, 2.2rem);
+font-weight: 800;
+letter-spacing: -0.02em;
+color: #fff;
+line-height: 1.1;
+margin-bottom: 6px;
+}
+
+h1 span.accent { color: var(–accent); }
+h1 span.accent2 { color: var(–accent2); }
+h1 span.accent3 { color: var(–accent3); }
+
+.subtitle {
+font-size: 0.72rem;
+color: var(–muted);
+letter-spacing: 0.1em;
+margin-bottom: 20px;
+text-transform: uppercase;
+}
+
+/* CONTROLS */
+.controls {
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+align-items: center;
+}
+
+.search-wrap {
+position: relative;
+flex: 1;
+min-width: 220px;
+}
+
+.search-wrap svg {
+position: absolute;
+left: 12px;
+top: 50%;
+transform: translateY(-50%);
+color: var(–muted);
+pointer-events: none;
+}
+
+input[type=“text”] {
+width: 100%;
+background: var(–surface);
+border: 1px solid var(–border);
+color: var(–text);
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.82rem;
+padding: 9px 12px 9px 36px;
+border-radius: 6px;
+outline: none;
+transition: border-color 0.2s;
+}
+input[type=“text”]:focus { border-color: var(–accent); }
+input::placeholder { color: var(–muted); }
+
+.filter-btns {
+display: flex;
+gap: 6px;
+flex-wrap: wrap;
+}
+
+.filter-btn {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.72rem;
+padding: 6px 12px;
+border-radius: 4px;
+border: 1px solid var(–border);
+background: transparent;
+color: var(–muted);
+cursor: pointer;
+transition: all 0.18s;
+letter-spacing: 0.06em;
+text-transform: uppercase;
+}
+.filter-btn:hover { color: var(–text); border-color: #3a4a5a; }
+.filter-btn.active-all  { background: var(–accent); color: #000; border-color: var(–accent); }
+.filter-btn.active-de   { background: var(–accent3); color: #fff; border-color: var(–accent3); }
+.filter-btn.active-en   { background: var(–accent2); color: #fff; border-color: var(–accent2); }
+.filter-btn.active-zh   { background: var(–accent); color: #000; border-color: var(–accent); }
+
+/* STATS */
+.stats {
+max-width: 960px;
+margin: 16px auto 0;
+padding: 0 24px;
+font-size: 0.7rem;
+color: var(–muted);
+}
+
+/* CATEGORY SECTION */
+main {
+max-width: 960px;
+margin: 0 auto;
+padding: 24px 24px 0;
+}
+
+.category {
+margin-bottom: 36px;
+}
+
+.cat-label {
+font-family: ‘Syne’, sans-serif;
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 10px;
+padding-left: 4px;
+border-left: 2px solid var(–accent3);
+padding-left: 8px;
+}
+
+/* TABLE */
+.glossar-table {
+width: 100%;
+border-collapse: collapse;
+background: var(–surface);
+border-radius: 8px;
+overflow: hidden;
+border: 1px solid var(–border);
+}
+
+.glossar-table thead tr {
+background: #0f1820;
+border-bottom: 1px solid var(–border);
+}
+
+.glossar-table th {
+padding: 10px 16px;
+font-size: 0.64rem;
+font-weight: 700;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+text-align: left;
+}
+.th-de { color: var(–accent3); }
+.th-en { color: var(–accent2); }
+.th-zh { color: var(–accent); }
+.th-py { color: #6ab0d0; }
+
+.glossar-table tbody tr {
+border-bottom: 1px solid #131e28;
+transition: background 0.14s;
+}
+.glossar-table tbody tr:last-child { border-bottom: none; }
+.glossar-table tbody tr:hover { background: #161f2a; }
+
+.glossar-table td {
+padding: 11px 16px;
+font-size: 0.82rem;
+vertical-align: middle;
+}
+
+.cell-de { color: #c8b8ff; font-weight: 700; }
+.cell-en { color: #ffa07a; }
+.cell-zh {
+font-family: ‘Noto Sans TC’, ‘JetBrains Mono’, monospace;
+color: #80ffd4;
+font-size: 1.0rem;
+}
+.cell-py { color: #6ab0d0; font-style: italic; font-size: 0.75rem; }
+
+.glossar-table tr.hidden { display: none; }
+
+/* NO RESULTS */
+.no-results {
+text-align: center;
+padding: 48px;
+color: var(–muted);
+font-size: 0.82rem;
+display: none;
+}
+
+/* EXPORT BUTTON */
+.export-row {
+max-width: 960px;
+margin: 16px auto 0;
+padding: 0 24px;
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+}
+
+.export-btn {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.72rem;
+padding: 8px 16px;
+border-radius: 5px;
+border: 1px solid var(–accent);
+background: rgba(0,212,170,0.08);
+color: var(–accent);
+cursor: pointer;
+transition: all 0.18s;
+letter-spacing: 0.06em;
+}
+.export-btn:hover { background: var(–accent); color: #000; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(–bg); }
+::-webkit-scrollbar-thumb { background: var(–border); border-radius: 3px; }
+
+@media (max-width: 640px) {
+/* Switch to card layout on mobile */
+.glossar-table thead { display: none; }
+.glossar-table tbody tr {
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: auto auto;
+gap: 2px 8px;
+padding: 10px 12px;
+border-bottom: 1px solid #131e28;
+}
+.glossar-table td {
+display: block;
+padding: 1px 0;
+border: none;
+font-size: 0.78rem;
+}
+/* Row 1: DE (left) + EN (right) */
+.cell-de {
+grid-column: 1; grid-row: 1;
+font-size: 0.82rem;
+}
+.cell-en {
+grid-column: 2; grid-row: 1;
+font-size: 0.78rem;
+}
+/* Row 2: ZH (left) + Pinyin (right) */
+.cell-zh {
+grid-column: 1; grid-row: 2;
+font-size: 1.0rem;
+}
+.cell-py {
+grid-column: 2; grid-row: 2;
+font-size: 0.7rem;
+align-self: center;
+}
+/* Add small label badges */
+.cell-de::before { content: “DE “; color: var(–accent3); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; }
+.cell-en::before { content: “EN “; color: var(–accent2); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; }
+.cell-zh::before { content: “繁 “; color: var(–accent);  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; }
+.cell-py::before { content: “拼 “; color: #6ab0d0;        font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1><span class="accent3">Tech</span><span class="accent">Glossar</span> <span class="accent2">技術術語</span></h1>
+    <p class="subtitle">Deutsch &nbsp;·&nbsp; English &nbsp;·&nbsp; 繁體中文 + Pīnyīn</p>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Suchen / Search / 搜尋...">
+      </div>
+      <div class="filter-btns">
+        <button class="filter-btn active-all" onclick="setFilter('all',this)">Alle</button>
+        <button class="filter-btn" onclick="setFilter('Software',this)">Software</button>
+        <button class="filter-btn" onclick="setFilter('Hardware',this)">Hardware</button>
+        <button class="filter-btn" onclick="setFilter('Netzwerk',this)">Netzwerk</button>
+        <button class="filter-btn" onclick="setFilter('KI / ML',this)">KI / ML</button>
+        <button class="filter-btn" onclick="setFilter('Elektronik',this)">Elektronik</button>
+        <button class="filter-btn" onclick="setFilter('Automation',this)">Automation</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stats"><span id="countDisplay"></span></div>
+<div class="export-row">
+  <button class="export-btn" onclick="exportCSV()">⬇ CSV exportieren</button>
+  <button class="export-btn" onclick="window.print()">🖨 Drucken</button>
+</div>
+
+<main id="main"></main>
+<div class="no-results" id="noResults">Keine Ergebnisse gefunden / No results / 找不到結果</div>
+
+<script>
+const data = [
+  // ── SOFTWARE ─────────────────────────────────────────────────────────
+  { cat:"Software", de:"Algorithmus",       en:"Algorithm",           zh:"演算法",     py:"yǎn suàn fǎ" },
+  { cat:"Software", de:"Variable",          en:"Variable",            zh:"變數",       py:"biàn shù" },
+  { cat:"Software", de:"Funktion",          en:"Function",            zh:"函式",       py:"hán shì" },
+  { cat:"Software", de:"Schleife",          en:"Loop",                zh:"迴圈",       py:"huí quān" },
+  { cat:"Software", de:"Bedingung",         en:"Condition",           zh:"條件",       py:"tiáo jiàn" },
+  { cat:"Software", de:"Klasse",            en:"Class",               zh:"類別",       py:"lèi bié" },
+  { cat:"Software", de:"Objekt",            en:"Object",              zh:"物件",       py:"wù jiàn" },
+  { cat:"Software", de:"Schnittstelle",     en:"Interface",           zh:"介面",       py:"jiè miàn" },
+  { cat:"Software", de:"Bibliothek",        en:"Library",             zh:"函式庫",     py:"hán shì kù" },
+  { cat:"Software", de:"Framework",         en:"Framework",           zh:"框架",       py:"kuàng jià" },
+  { cat:"Software", de:"Compiler",          en:"Compiler",            zh:"編譯器",     py:"biān yì qì" },
+  { cat:"Software", de:"Debuggen",          en:"Debugging",           zh:"除錯",       py:"chú cuò" },
+  { cat:"Software", de:"Versionskontrolle", en:"Version Control",     zh:"版本控制",   py:"bǎn běn kòng zhì" },
+  { cat:"Software", de:"Quellcode",         en:"Source Code",         zh:"原始碼",     py:"yuán shǐ mǎ" },
+  { cat:"Software", de:"Datenbank",         en:"Database",            zh:"資料庫",     py:"zī liào kù" },
+  { cat:"Software", de:"Anwendung",         en:"Application",         zh:"應用程式",   py:"yìng yòng chéng shì" },
+  { cat:"Software", de:"Benutzeroberfläche",en:"User Interface (UI)", zh:"使用者介面", py:"shǐ yòng zhě jiè miàn" },
+  { cat:"Software", de:"Deployment",        en:"Deployment",          zh:"部署",       py:"bù shǔ" },
+  { cat:"Software", de:"Container",         en:"Container",           zh:"容器",       py:"róng qì" },
+  { cat:"Software", de:"Open Source",       en:"Open Source",         zh:"開源",       py:"kāi yuán" },
+
+  // ── HARDWARE ─────────────────────────────────────────────────────────
+  { cat:"Hardware", de:"Prozessor",         en:"Processor (CPU)",     zh:"處理器",     py:"chǔ lǐ qì" },
+  { cat:"Hardware", de:"Arbeitsspeicher",   en:"RAM",                 zh:"隨機存取記憶體", py:"suí jī cún qǔ jì yì tǐ" },
+  { cat:"Hardware", de:"Festplatte",        en:"Hard Drive (HDD/SSD)",zh:"硬碟",       py:"yìng dié" },
+  { cat:"Hardware", de:"Grafikkarte",       en:"Graphics Card (GPU)", zh:"顯示卡",     py:"xiǎn shì kǎ" },
+  { cat:"Hardware", de:"Hauptplatine",      en:"Motherboard",         zh:"主機板",     py:"zhǔ jī bǎn" },
+  { cat:"Hardware", de:"Netzteil",          en:"Power Supply (PSU)",  zh:"電源供應器", py:"diàn yuán gōng yìng qì" },
+  { cat:"Hardware", de:"Kühlkörper",        en:"Heat Sink",           zh:"散熱器",     py:"sàn rè qì" },
+  { cat:"Hardware", de:"Mikrokontroller",   en:"Microcontroller",     zh:"微控制器",   py:"wēi kòng zhì qì" },
+  { cat:"Hardware", de:"Sensor",            en:"Sensor",              zh:"感測器",     py:"gǎn cè qì" },
+  { cat:"Hardware", de:"Aktor",             en:"Actuator",            zh:"致動器",     py:"zhì dòng qì" },
+  { cat:"Hardware", de:"Schaltkreis",       en:"Circuit",             zh:"電路",       py:"diàn lù" },
+  { cat:"Hardware", de:"Platine",           en:"PCB (Printed Circuit Board)", zh:"印刷電路板", py:"yìn shuā diàn lù bǎn" },
+  { cat:"Hardware", de:"Eingebettetes System", en:"Embedded System",  zh:"嵌入式系統", py:"qiàn rù shì xì tǒng" },
+
+  // ── NETZWERK ─────────────────────────────────────────────────────────
+  { cat:"Netzwerk", de:"Protokoll",         en:"Protocol",            zh:"通訊協定",   py:"tōng xùn xié dìng" },
+  { cat:"Netzwerk", de:"IP-Adresse",        en:"IP Address",          zh:"網路位址",   py:"wǎng lù wèi zhǐ" },
+  { cat:"Netzwerk", de:"Router",            en:"Router",              zh:"路由器",     py:"lù yóu qì" },
+  { cat:"Netzwerk", de:"Firewall",          en:"Firewall",            zh:"防火牆",     py:"fáng huǒ qiáng" },
+  { cat:"Netzwerk", de:"Bandbreite",        en:"Bandwidth",           zh:"頻寬",       py:"pín kuān" },
+  { cat:"Netzwerk", de:"Cloud",             en:"Cloud",               zh:"雲端",       py:"yún duān" },
+  { cat:"Netzwerk", de:"Server",            en:"Server",              zh:"伺服器",     py:"sì fú qì" },
+  { cat:"Netzwerk", de:"API",               en:"API (Application Programming Interface)", zh:"應用程式介面", py:"yìng yòng chéng shì jiè miàn" },
+  { cat:"Netzwerk", de:"Datenverschlüsselung", en:"Data Encryption",  zh:"資料加密",   py:"zī liào jiā mì" },
+  { cat:"Netzwerk", de:"Latenz",            en:"Latency",             zh:"延遲",       py:"yán chí" },
+
+  // ── KI / ML ──────────────────────────────────────────────────────────
+  { cat:"KI / ML", de:"Künstliche Intelligenz", en:"Artificial Intelligence (AI)", zh:"人工智慧", py:"rén gōng zhì huì" },
+  { cat:"KI / ML", de:"Maschinelles Lernen", en:"Machine Learning",   zh:"機器學習",   py:"jī qì xué xí" },
+  { cat:"KI / ML", de:"Neuronales Netz",    en:"Neural Network",      zh:"神經網路",   py:"shén jīng wǎng lù" },
+  { cat:"KI / ML", de:"Tiefes Lernen",      en:"Deep Learning",       zh:"深度學習",   py:"shēn dù xué xí" },
+  { cat:"KI / ML", de:"Training",           en:"Training",            zh:"訓練",       py:"xùn liàn" },
+  { cat:"KI / ML", de:"Datensatz",          en:"Dataset",             zh:"資料集",     py:"zī liào jí" },
+  { cat:"KI / ML", de:"Modell",             en:"Model",               zh:"模型",       py:"mó xíng" },
+  { cat:"KI / ML", de:"Vorhersage",         en:"Prediction",          zh:"預測",       py:"yù cè" },
+  { cat:"KI / ML", de:"Prompt",             en:"Prompt",              zh:"提示詞",     py:"tí shì cí" },
+  { cat:"KI / ML", de:"Sprachmodell",       en:"Language Model (LLM)",zh:"語言模型",   py:"yǔ yán mó xíng" },
+  { cat:"KI / ML", de:"Parameter",          en:"Parameter",           zh:"參數",       py:"cān shù" },
+
+  // ── ELEKTRONIK ───────────────────────────────────────────────────────
+  { cat:"Elektronik", de:"Spannung",        en:"Voltage",             zh:"電壓",       py:"diàn yā" },
+  { cat:"Elektronik", de:"Stromstärke",     en:"Current",             zh:"電流",       py:"diàn liú" },
+  { cat:"Elektronik", de:"Widerstand",      en:"Resistance",          zh:"電阻",       py:"diàn zǔ" },
+  { cat:"Elektronik", de:"Kondensator",     en:"Capacitor",           zh:"電容器",     py:"diàn róng qì" },
+  { cat:"Elektronik", de:"Transistor",      en:"Transistor",          zh:"電晶體",     py:"diàn jīng tǐ" },
+  { cat:"Elektronik", de:"Diode",           en:"Diode",               zh:"二極體",     py:"èr jí tǐ" },
+  { cat:"Elektronik", de:"PWM",             en:"PWM (Pulse Width Modulation)", zh:"脈寬調變", py:"mài kuān tiáo biàn" },
+  { cat:"Elektronik", de:"Analog",          en:"Analog",              zh:"類比",       py:"lèi bǐ" },
+  { cat:"Elektronik", de:"Digital",         en:"Digital",             zh:"數位",       py:"shù wèi" },
+  { cat:"Elektronik", de:"Frequenz",        en:"Frequency",           zh:"頻率",       py:"pín lǜ" },
+
+  // ── AUTOMATION ───────────────────────────────────────────────────────
+  { cat:"Automation", de:"Steuerung",       en:"Control",             zh:"控制",       py:"kòng zhì" },
+  { cat:"Automation", de:"Regelung",        en:"Closed-loop Control", zh:"閉迴路控制", py:"bì huí lù kòng zhì" },
+  { cat:"Automation", de:"SPS",             en:"PLC (Programmable Logic Controller)", zh:"可程式化邏輯控制器", py:"kě chéng shì huà luó jí kòng zhì qì" },
+  { cat:"Automation", de:"Roboterarm",      en:"Robotic Arm",         zh:"機械手臂",   py:"jī xiè shǒu bì" },
+  { cat:"Automation", de:"Servo",           en:"Servo Motor",         zh:"伺服馬達",   py:"sì fú mǎ dá" },
+  { cat:"Automation", de:"Schrittmotor",    en:"Stepper Motor",       zh:"步進馬達",   py:"bù jìn mǎ dá" },
+  { cat:"Automation", de:"Feedback",        en:"Feedback",            zh:"回饋",       py:"huí kuì" },
+  { cat:"Automation", de:"PID-Regler",      en:"PID Controller",      zh:"PID 控制器", py:"PID kòng zhì qì" },
+  { cat:"Automation", de:"Industrie 4.0",   en:"Industry 4.0",        zh:"工業四.0",   py:"gōng yè sì diǎn líng" },
+  { cat:"Automation", de:"Fertigung",       en:"Manufacturing",       zh:"製造",       py:"zhì zào" },
+  { cat:"Automation", de:"Effizienz",       en:"Efficiency",          zh:"效率",       py:"xiào lǜ" },
+];
+
+let activeFilter = 'all';
+
+function groupByCategory(arr) {
+  const m = {};
+  arr.forEach(r => { (m[r.cat] = m[r.cat]||[]).push(r); });
+  return m;
+}
+
+function buildTable(rows) {
+  return `<table class="glossar-table">
+    <thead><tr>
+      <th class="th-de">🇩🇪 Deutsch</th>
+      <th class="th-en">🇬🇧 English</th>
+      <th class="th-zh">🇹🇼 繁體中文</th>
+      <th class="th-py">Pīnyīn</th>
+    </tr></thead>
+    <tbody>
+      ${rows.map(r => `<tr data-cat="${r.cat}" data-search="${[r.de,r.en,r.zh,r.py].join(' ').toLowerCase()}">
+        <td class="cell-de">${r.de}</td>
+        <td class="cell-en">${r.en}</td>
+        <td class="cell-zh">${r.zh}</td>
+        <td class="cell-py">${r.py}</td>
+      </tr>`).join('')}
+    </tbody>
+  </table>`;
+}
+
+function render() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  let filtered = activeFilter === 'all' ? data : data.filter(r => r.cat === activeFilter);
+  if (q) filtered = filtered.filter(r => [r.de,r.en,r.zh,r.py].join(' ').toLowerCase().includes(q));
+
+  const main = document.getElementById('main');
+  const noRes = document.getElementById('noResults');
+
+  if (!filtered.length) {
+    main.innerHTML = '';
+    noRes.style.display = 'block';
+    document.getElementById('countDisplay').textContent = '';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  const grouped = groupByCategory(filtered);
+  main.innerHTML = Object.entries(grouped).map(([cat, rows]) => `
+    <div class="category">
+      <div class="cat-label">${cat}</div>
+      ${buildTable(rows)}
+    </div>
+  `).join('');
+
+  document.getElementById('countDisplay').textContent =
+    `${filtered.length} Begriff${filtered.length!==1?'e':''} · ${Object.keys(grouped).length} Kategorie${Object.keys(grouped).length!==1?'n':''}`;
+}
+
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn');
+  btn.classList.add(f==='all'?'active-all':f==='Software'?'active-de':f==='Hardware'?'active-en':'active-zh');
+  render();
+}
+
+document.getElementById('searchInput').addEventListener('input', render);
+
+function exportCSV() {
+  const header = 'Deutsch,English,繁體中文,Pīnyīn,Kategorie';
+  const rows = data.map(r => [r.de,r.en,r.zh,r.py,r.cat].map(v=>`"${v}"`).join(','));
+  const blob = new Blob(['\uFEFF'+header+'\n'+rows.join('\n')], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'tech-glossar.csv'; a.click();
+}
+
+render();
+</script>
+
+</body>
+</html>
